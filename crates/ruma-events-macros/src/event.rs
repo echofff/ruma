@@ -323,88 +323,87 @@ fn expand_deserialize_event(
         quote! {}
     };
 
-    Ok(quote! {
+    let block = quote! {
+        #[derive(#serde::Deserialize)]
+        #[serde(field_identifier, rename_all = "snake_case")]
+        enum Field {
+            // since this is represented as an enum we have to add it so the JSON picks it
+            // up
+            Type,
+            #( #enum_variants, )*
+            #[serde(other)]
+            Unknown,
+        }
+
+        /// Visits the fields of an event struct to handle deserialization of
+        /// the `content` and `prev_content` fields.
+        struct EventVisitor #impl_generics (#deserialize_phantom_type #ty_gen);
+
+        #[automatically_derived]
+        impl #deserialize_impl_gen #serde::de::Visitor<'de>
+            for EventVisitor #ty_gen #where_clause
+        {
+            type Value = #ident #ty_gen;
+
+            fn expecting(&self, formatter: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                write!(formatter, "struct implementing {}", stringify!(#content_type))
+            }
+
+            fn visit_map<A>(self, mut map: A) -> Result<Self::Value, A::Error>
+            where
+                A: #serde::de::MapAccess<'de>,
+            {
+                use #serde::de::Error as _;
+
+                let mut event_type: Option<String> = None;
+                #( let mut #field_names: Option<#deserialize_var_types> = None; )*
+
+                while let Some(key) = map.next_key()? {
+                    match key {
+                        Field::Unknown => {
+                            let _: #serde::de::IgnoredAny = map.next_value()?;
+                        },
+                        Field::Type => {
+                            if event_type.is_some() {
+                                return Err(#serde::de::Error::duplicate_field("type"));
+                            }
+                            event_type = Some(map.next_value()?);
+                        }
+                        #(
+                            Field::#enum_variants => {
+                                if #field_names.is_some() {
+                                    return Err(#serde::de::Error::duplicate_field(
+                                        stringify!(#field_names),
+                                    ));
+                                }
+                                #field_names = Some(map.next_value()?);
+                            }
+                        )*
+                    }
+                }
+
+                let event_type =
+                    event_type.ok_or_else(|| #serde::de::Error::missing_field("type"))?;
+                #( #ok_or_else_fields )*
+
+                Ok(#ident {
+                    #( #field_names ),*
+                })
+            }
+        }
+
         #[automatically_derived]
         impl #deserialize_impl_gen #serde::de::Deserialize<'de> for #ident #ty_gen #where_clause {
             fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
             where
                 D: #serde::de::Deserializer<'de>,
             {
-                #[derive(#serde::Deserialize)]
-                #[serde(field_identifier, rename_all = "snake_case")]
-                enum Field {
-                    // since this is represented as an enum we have to add it so the JSON picks it
-                    // up
-                    Type,
-                    #( #enum_variants, )*
-                    #[serde(other)]
-                    Unknown,
-                }
-
-                /// Visits the fields of an event struct to handle deserialization of
-                /// the `content` and `prev_content` fields.
-                struct EventVisitor #impl_generics (#deserialize_phantom_type #ty_gen);
-
-                #[automatically_derived]
-                impl #deserialize_impl_gen #serde::de::Visitor<'de>
-                    for EventVisitor #ty_gen #where_clause
-                {
-                    type Value = #ident #ty_gen;
-
-                    fn expecting(
-                        &self,
-                        formatter: &mut ::std::fmt::Formatter<'_>,
-                    ) -> ::std::fmt::Result {
-                        write!(formatter, "struct implementing {}", stringify!(#content_type))
-                    }
-
-                    fn visit_map<A>(self, mut map: A) -> Result<Self::Value, A::Error>
-                    where
-                        A: #serde::de::MapAccess<'de>,
-                    {
-                        use #serde::de::Error as _;
-
-                        let mut event_type: Option<String> = None;
-                        #( let mut #field_names: Option<#deserialize_var_types> = None; )*
-
-                        while let Some(key) = map.next_key()? {
-                            match key {
-                                Field::Unknown => {
-                                    let _: #serde::de::IgnoredAny = map.next_value()?;
-                                },
-                                Field::Type => {
-                                    if event_type.is_some() {
-                                        return Err(#serde::de::Error::duplicate_field("type"));
-                                    }
-                                    event_type = Some(map.next_value()?);
-                                }
-                                #(
-                                    Field::#enum_variants => {
-                                        if #field_names.is_some() {
-                                            return Err(#serde::de::Error::duplicate_field(
-                                                stringify!(#field_names),
-                                            ));
-                                        }
-                                        #field_names = Some(map.next_value()?);
-                                    }
-                                )*
-                            }
-                        }
-
-                        let event_type =
-                            event_type.ok_or_else(|| #serde::de::Error::missing_field("type"))?;
-                        #( #ok_or_else_fields )*
-
-                        Ok(#ident {
-                            #( #field_names ),*
-                        })
-                    }
-                }
-
                 deserializer.deserialize_map(EventVisitor(#deserialize_phantom_type))
             }
         }
-    })
+    };
+
+    Ok(quote! { const _: () = { #block }; })
 }
 
 fn expand_redact_event(
