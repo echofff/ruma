@@ -6,9 +6,9 @@ use ruma_identifiers::{EventId, RoomId, UserId};
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    EphemeralRoomEventContent, GlobalAccountDataEventContent, MessageEventContent,
+    EphemeralRoomEventContent, GlobalAccountDataEventContent, MessageEventContent, MessageUnsigned,
     RedactedMessageEventContent, RedactedStateEventContent, RedactedUnsigned,
-    RoomAccountDataEventContent, StateEventContent, ToDeviceEventContent, Unsigned,
+    RoomAccountDataEventContent, StateEventContent, StateUnsigned, ToDeviceEventContent,
 };
 
 /// A global account data event.
@@ -64,7 +64,7 @@ pub struct MessageEvent<C: MessageEventContent> {
     pub room_id: Box<RoomId>,
 
     /// Additional key-value pairs not signed by the homeserver.
-    pub unsigned: Unsigned,
+    pub unsigned: MessageUnsigned,
 }
 
 /// A message event without a `room_id`.
@@ -86,7 +86,7 @@ pub struct SyncMessageEvent<C: MessageEventContent> {
     pub origin_server_ts: MilliSecondsSinceUnixEpoch,
 
     /// Additional key-value pairs not signed by the homeserver.
-    pub unsigned: Unsigned,
+    pub unsigned: MessageUnsigned,
 }
 
 /// A redacted message event.
@@ -163,11 +163,8 @@ pub struct StateEvent<C: StateEventContent> {
     /// affects.
     pub state_key: String,
 
-    /// Optional previous content for this event.
-    pub prev_content: Option<C>,
-
     /// Additional key-value pairs not signed by the homeserver.
-    pub unsigned: Unsigned,
+    pub unsigned: StateUnsigned<C>,
 }
 
 /// A state event without a `room_id`.
@@ -194,11 +191,8 @@ pub struct SyncStateEvent<C: StateEventContent> {
     /// affects.
     pub state_key: String,
 
-    /// Optional previous content for this event.
-    pub prev_content: Option<C>,
-
     /// Additional key-value pairs not signed by the homeserver.
-    pub unsigned: Unsigned,
+    pub unsigned: StateUnsigned<C>,
 }
 
 /// A stripped-down state event, used for previews of rooms the user has been invited to.

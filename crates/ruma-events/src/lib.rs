@@ -186,7 +186,7 @@ pub use self::relation::Relations;
 pub use self::{
     enums::*,
     event_kinds::*,
-    unsigned::{RedactedUnsigned, Unsigned},
+    unsigned::{MessageUnsigned, RedactedUnsigned, StateUnsigned},
 };
 
 #[doc(hidden)]

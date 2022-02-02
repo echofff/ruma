@@ -10,7 +10,7 @@ use ruma_events::{
         AudioMessageEventContent, InReplyTo, KeyVerificationRequestEventContent, MessageType,
         Relation, RoomMessageEvent, RoomMessageEventContent, TextMessageEventContent,
     },
-    Unsigned,
+    MessageUnsigned,
 };
 use ruma_identifiers::{event_id, mxc_uri, room_id, user_id, DeviceId};
 use serde_json::{from_value as from_json_value, json, to_value as to_json_value};
@@ -39,7 +39,7 @@ fn serialization() {
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(10_000)),
         room_id: room_id!("!testroomid:example.org").to_owned(),
         sender: user_id!("@user:example.org").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     };
 
     assert_eq!(

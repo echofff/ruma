@@ -173,25 +173,7 @@ fn expand_deserialize_event(
                     quote! { #content_type }
                 }
             } else {
-                #[allow(unused_mut)]
-                let mut ty = quote! { #ty };
-
-                #[cfg(feature = "compat")]
-                if matches!(_kind, EventKind::State) && name == "unsigned" {
-                    match var {
-                        EventKindVariation::Full | EventKindVariation::Sync => {
-                            ty = quote! { #ruma_events::UnsignedWithPrevContent };
-                        }
-                        EventKindVariation::Redacted | EventKindVariation::RedactedSync => {
-                            ty = quote! { #ruma_events::RedactedUnsignedWithPrevContent };
-                        }
-                        EventKindVariation::Stripped | EventKindVariation::Initial => {
-                            unreachable!()
-                        }
-                    }
-                }
-
-                ty
+                quote! { #ty }
             }
         })
         .collect();

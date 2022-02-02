@@ -6,7 +6,8 @@ use ruma_events::{
     call::{answer::CallAnswerEventContent, SessionDescription, SessionDescriptionType},
     room::{ImageInfo, ThumbnailInfo},
     sticker::StickerEventContent,
-    AnyMessageEvent, AnyMessageEventContent, AnySyncMessageEvent, MessageEvent, RawExt, Unsigned,
+    AnyMessageEvent, AnyMessageEventContent, AnySyncMessageEvent, MessageEvent, MessageUnsigned,
+    RawExt,
 };
 use ruma_identifiers::{event_id, mxc_uri, room_id, user_id};
 use ruma_serde::Raw;
@@ -36,7 +37,7 @@ fn message_serialize_sticker() {
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
         room_id: room_id!("!roomid:room.com").to_owned(),
         sender: user_id!("@carl:example.com").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     };
 
     let actual = to_json_value(&aliases_event).unwrap();

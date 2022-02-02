@@ -3,7 +3,7 @@ use matches::assert_matches;
 use ruma_common::MilliSecondsSinceUnixEpoch;
 use ruma_events::{
     room::redaction::{RoomRedactionEvent, RoomRedactionEventContent},
-    AnyMessageEvent, Unsigned,
+    AnyMessageEvent, MessageUnsigned,
 };
 use ruma_identifiers::{event_id, room_id, user_id};
 use serde_json::{
@@ -33,7 +33,7 @@ fn serialize_redaction() {
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
         room_id: room_id!("!roomid:room.com").to_owned(),
         sender: user_id!("@carl:example.com").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     };
 
     let actual = to_json_value(&aliases_event).unwrap();

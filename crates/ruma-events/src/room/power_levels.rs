@@ -183,7 +183,7 @@ mod tests {
     use serde_json::{json, to_value as to_json_value};
 
     use super::{default_power_level, NotificationPowerLevels, RoomPowerLevelsEventContent};
-    use crate::{EventType, StateEvent, Unsigned};
+    use crate::{EventType, StateEvent, StateUnsigned};
 
     #[test]
     fn serialization_with_optional_fields_as_none() {
@@ -204,9 +204,8 @@ mod tests {
             },
             event_id: event_id!("$h29iv0s8:example.com").to_owned(),
             origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
-            prev_content: None,
             room_id: room_id!("!n8f893n9:example.com").to_owned(),
-            unsigned: Unsigned::default(),
+            unsigned: StateUnsigned::default(),
             sender: user_id!("@carl:example.com").to_owned(),
             state_key: "".into(),
         };
@@ -247,25 +246,29 @@ mod tests {
             },
             event_id: event_id!("$h29iv0s8:example.com").to_owned(),
             origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
-            prev_content: Some(RoomPowerLevelsEventContent {
-                // Make just one field different so we at least know they're two different objects.
-                ban: int!(42),
-                events: btreemap! {
-                    EventType::Dummy => int!(42)
-                },
-                events_default: int!(42),
-                invite: int!(42),
-                kick: int!(42),
-                redact: int!(42),
-                state_default: int!(42),
-                users: btreemap! {
-                    user.to_owned() => int!(42)
-                },
-                users_default: int!(42),
-                notifications: assign!(NotificationPowerLevels::new(), { room: int!(42) }),
-            }),
             room_id: room_id!("!n8f893n9:example.com").to_owned(),
-            unsigned: Unsigned { age: Some(int!(100)), ..Unsigned::default() },
+            unsigned: StateUnsigned {
+                age: Some(int!(100)),
+                prev_content: Some(RoomPowerLevelsEventContent {
+                    // Make just one field different so we at least know they're two different
+                    // objects.
+                    ban: int!(42),
+                    events: btreemap! {
+                        EventType::Dummy => int!(42)
+                    },
+                    events_default: int!(42),
+                    invite: int!(42),
+                    kick: int!(42),
+                    redact: int!(42),
+                    state_default: int!(42),
+                    users: btreemap! {
+                        user.to_owned() => int!(42)
+                    },
+                    users_default: int!(42),
+                    notifications: assign!(NotificationPowerLevels::new(), { room: int!(42) }),
+                }),
+                ..StateUnsigned::default()
+            },
             sender: user.to_owned(),
             state_key: "".into(),
         };

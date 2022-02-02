@@ -13,8 +13,9 @@ use ruma_events::{
     },
     AnyEphemeralRoomEvent, AnyMessageEvent, AnyRoomEvent, AnyStateEvent, AnyStateEventContent,
     AnySyncMessageEvent, AnySyncRoomEvent, AnySyncStateEvent, EphemeralRoomEventType, EventType,
-    GlobalAccountDataEventType, MessageEvent, MessageEventType, RoomAccountDataEventType,
-    StateEvent, StateEventType, SyncMessageEvent, SyncStateEvent, ToDeviceEventType, Unsigned,
+    GlobalAccountDataEventType, MessageEvent, MessageEventType, MessageUnsigned,
+    RoomAccountDataEventType, StateEvent, StateEventType, SyncMessageEvent, SyncStateEvent,
+    ToDeviceEventType,
 };
 
 fn message_event() -> JsonValue {
@@ -206,7 +207,7 @@ fn message_event_serialization() {
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(0)),
         room_id: room_id!("!roomid:example.com").to_owned(),
         sender: user_id!("@test:example.com").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     };
 
     assert_eq!(

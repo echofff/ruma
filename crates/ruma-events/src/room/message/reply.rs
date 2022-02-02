@@ -312,7 +312,7 @@ mod tests {
                 sender: user_id!("@alice:example.com").to_owned(),
                 origin_server_ts: ruma_common::MilliSecondsSinceUnixEpoch::now(),
                 room_id: room_id!("!n8f893n9:example.com").to_owned(),
-                unsigned: crate::Unsigned::new(),
+                unsigned: crate::MessageUnsigned::new(),
             }),
             "> <@alice:example.com> multi\n> line"
         );

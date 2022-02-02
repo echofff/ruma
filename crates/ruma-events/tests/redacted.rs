@@ -10,9 +10,9 @@ use ruma_events::{
         redaction::{RoomRedactionEventContent, SyncRoomRedactionEvent},
     },
     AnyMessageEvent, AnyRedactedMessageEvent, AnyRedactedSyncMessageEvent,
-    AnyRedactedSyncStateEvent, AnyRoomEvent, AnySyncRoomEvent, EventContent, Redact, RedactContent,
-    RedactedMessageEvent, RedactedSyncMessageEvent, RedactedSyncStateEvent, RedactedUnsigned,
-    Unsigned,
+    AnyRedactedSyncStateEvent, AnyRoomEvent, AnySyncRoomEvent, EventContent, MessageUnsigned,
+    Redact, RedactContent, RedactedMessageEvent, RedactedSyncMessageEvent, RedactedSyncStateEvent,
+    RedactedUnsigned,
 };
 use ruma_identifiers::{event_id, room_id, user_id, RoomVersionId};
 use serde_json::{
@@ -28,7 +28,7 @@ fn unsigned() -> RedactedUnsigned {
         event_id: event_id!("$h29iv0s8:example.com").to_owned(),
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
         sender: user_id!("@carl:example.com").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     }));
 
     unsigned
@@ -165,7 +165,7 @@ fn redacted_deserialize_any_room_sync() {
         event_id: event_id!("$h29iv0s8:example.com").to_owned(),
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
         sender: user_id!("@carl:example.com").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     }));
 
     let redacted = json!({
@@ -291,7 +291,7 @@ fn redact_method_properly_redacts() {
         event_id: event_id!("$h29iv0s8:example.com").to_owned(),
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
         sender: user_id!("@carl:example.com").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     };
 
     let event: AnyMessageEvent = from_json_value(ev).unwrap();

@@ -9,7 +9,7 @@ use ruma_events::{
     call::{answer::CallAnswerEventContent, SessionDescription, SessionDescriptionType},
     room::{ImageInfo, ThumbnailInfo},
     sticker::StickerEventContent,
-    AnyMessageEvent, MessageEvent, Unsigned,
+    AnyMessageEvent, MessageEvent, MessageUnsigned,
 };
 
 #[test]
@@ -90,7 +90,7 @@ fn serialize_message_event() {
         origin_server_ts: MilliSecondsSinceUnixEpoch(uint!(1)),
         room_id: room_id!("!roomid:room.com").to_owned(),
         sender: user_id!("@carl:example.com").to_owned(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     });
 
     let actual = to_json_value(&aliases_event).unwrap();

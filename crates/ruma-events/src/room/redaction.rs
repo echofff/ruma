@@ -7,7 +7,7 @@ use ruma_events_macros::{Event, EventContent};
 use ruma_identifiers::{EventId, RoomId, UserId};
 use serde::{Deserialize, Serialize};
 
-use crate::{Redact, RedactContent, RedactedUnsigned, Unsigned};
+use crate::{MessageUnsigned, Redact, RedactContent, RedactedUnsigned};
 
 /// Redaction event.
 #[derive(Clone, Debug, Event)]
@@ -32,7 +32,7 @@ pub struct RoomRedactionEvent {
     pub room_id: Box<RoomId>,
 
     /// Additional key-value pairs not signed by the homeserver.
-    pub unsigned: Unsigned,
+    pub unsigned: MessageUnsigned,
 }
 
 impl Redact for RoomRedactionEvent {
@@ -102,7 +102,7 @@ pub struct SyncRoomRedactionEvent {
     pub origin_server_ts: MilliSecondsSinceUnixEpoch,
 
     /// Additional key-value pairs not signed by the homeserver.
-    pub unsigned: Unsigned,
+    pub unsigned: MessageUnsigned,
 }
 
 impl Redact for SyncRoomRedactionEvent {

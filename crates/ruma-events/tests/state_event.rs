@@ -7,8 +7,8 @@ use ruma_events::{
         avatar::{ImageInfo, RoomAvatarEventContent},
         ThumbnailInfo,
     },
-    AnyRoomEvent, AnyStateEvent, AnyStateEventContent, AnySyncStateEvent, RawExt, StateEvent,
-    SyncStateEvent, Unsigned,
+    AnyRoomEvent, AnyStateEvent, AnyStateEventContent, AnySyncStateEvent, MessageUnsigned, RawExt,
+    StateEvent, SyncStateEvent,
 };
 use ruma_identifiers::{event_id, mxc_uri, room_alias_id, room_id, user_id};
 use ruma_serde::Raw;
@@ -47,7 +47,7 @@ fn serialize_aliases_with_prev_content() {
         room_id: room_id!("!roomid:room.com").to_owned(),
         sender: user_id!("@carl:example.com").to_owned(),
         state_key: "".into(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     };
 
     let actual = to_json_value(&aliases_event).unwrap();
@@ -68,7 +68,7 @@ fn serialize_aliases_without_prev_content() {
         room_id: room_id!("!roomid:room.com").to_owned(),
         sender: user_id!("@carl:example.com").to_owned(),
         state_key: "".into(),
-        unsigned: Unsigned::default(),
+        unsigned: MessageUnsigned::default(),
     };
 
     let actual = to_json_value(&aliases_event).unwrap();
