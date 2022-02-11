@@ -125,6 +125,7 @@ unstable-msc2677 = [
     "ruma-events/unstable-msc2677",
 ]
 unstable-msc3618 = ["ruma-federation-api/unstable-msc3618"]
+unstable-msc3723 = ["ruma-federation-api/unstable-msc3723"]
 
 # Private feature, only used in test / benchmarking code
 __ci = [
@@ -135,7 +136,8 @@ __ci = [
     "unstable-msc2676",
     "unstable-msc2677",
     "unstable-msc3618",
-    "ruma-state-res/__ci", 
+    "unstable-msc3723",
+    "ruma-state-res/__ci",
 ]
 
 [dependencies]
