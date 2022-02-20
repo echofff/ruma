@@ -27,7 +27,9 @@ use crate::generate_localpart;
 #[derive(PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct DeviceId(str);
 
-opaque_identifier!(DeviceId);
+owned_identifier!(OwnedDeviceId, DeviceId);
+
+opaque_identifier!(DeviceId, OwnedDeviceId);
 
 impl DeviceId {
     /// Generates a random `DeviceId`, suitable for assignment to a new device.
