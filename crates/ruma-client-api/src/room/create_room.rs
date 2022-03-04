@@ -15,9 +15,9 @@ pub mod v3 {
             },
             AnyInitialStateEvent,
         },
+        identifiers::{RoomId, RoomName, RoomVersionId, UserId},
         room::RoomType,
     };
-    use ruma_identifiers::{RoomId, RoomName, RoomVersionId, UserId};
     use ruma_serde::{Raw, StringEnum};
     use serde::{Deserialize, Serialize};
 

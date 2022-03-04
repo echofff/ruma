@@ -8,8 +8,10 @@
 use std::collections::BTreeMap;
 
 use js_int::UInt;
-use ruma_common::MilliSecondsSinceUnixEpoch;
-use ruma_identifiers::{EventId, RoomId, ServerName, ServerSigningKeyId, UserId};
+use ruma_common::{
+    identifiers::{EventId, RoomId, ServerName, ServerSigningKeyId, UserId},
+    MilliSecondsSinceUnixEpoch,
+};
 use serde::{
     de::{Error as _, IgnoredAny},
     Deserialize, Deserializer, Serialize,

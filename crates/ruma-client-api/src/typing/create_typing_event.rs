@@ -7,8 +7,10 @@ pub mod v3 {
 
     use std::time::Duration;
 
-    use ruma_common::api::ruma_api;
-    use ruma_identifiers::{RoomId, UserId};
+    use ruma_common::{
+        api::ruma_api,
+        identifiers::{RoomId, UserId},
+    };
     use serde::{de::Error, Deserialize, Deserializer, Serialize};
 
     ruma_api! {

@@ -2,8 +2,10 @@
 //!
 //! [`m.room.redaction`]: https://spec.matrix.org/v1.2/client-server-api/#mroomredaction
 
-use ruma_common::MilliSecondsSinceUnixEpoch;
-use ruma_identifiers::{EventId, RoomId, UserId};
+use ruma_common::{
+    identifiers::{EventId, RoomId, UserId},
+    MilliSecondsSinceUnixEpoch,
+};
 use ruma_macros::{Event, EventContent};
 use serde::{Deserialize, Serialize};
 
@@ -41,7 +43,7 @@ impl Redact for RoomRedactionEvent {
     fn redact(
         self,
         redaction: SyncRoomRedactionEvent,
-        version: &ruma_identifiers::RoomVersionId,
+        version: &ruma_common::identifiers::RoomVersionId,
     ) -> Self::Redacted {
         RedactedRoomRedactionEvent {
             content: self.content.redact(version),
@@ -111,7 +113,7 @@ impl Redact for SyncRoomRedactionEvent {
     fn redact(
         self,
         redaction: SyncRoomRedactionEvent,
-        version: &ruma_identifiers::RoomVersionId,
+        version: &ruma_common::identifiers::RoomVersionId,
     ) -> Self::Redacted {
         RedactedSyncRoomRedactionEvent {
             content: self.content.redact(version),

@@ -14,9 +14,9 @@ use ruma_client_api::{
 };
 use ruma_common::{
     api::{MatrixVersion, OutgoingRequest, SendAccessToken},
+    identifiers::{DeviceId, UserId},
     presence::PresenceState,
 };
-use ruma_identifiers::{DeviceId, UserId};
 
 use crate::{
     add_user_id_to_query, send_customized_request, Error, HttpClient, ResponseError, ResponseResult,

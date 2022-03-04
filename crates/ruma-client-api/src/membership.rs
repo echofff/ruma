@@ -14,8 +14,10 @@ pub mod unban_user;
 
 use std::collections::BTreeMap;
 
-use ruma_common::thirdparty::Medium;
-use ruma_identifiers::{ServerName, ServerSigningKeyId, UserId};
+use ruma_common::{
+    identifiers::{ServerName, ServerSigningKeyId, UserId},
+    thirdparty::Medium,
+};
 use ruma_serde::Outgoing;
 use serde::Serialize;
 

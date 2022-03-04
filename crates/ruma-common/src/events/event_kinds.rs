@@ -1,7 +1,9 @@
 #![allow(clippy::exhaustive_structs)]
 
-use ruma_common::MilliSecondsSinceUnixEpoch;
-use ruma_identifiers::{EventId, RoomId, UserId};
+use ruma_common::{
+    identifiers::{EventId, RoomId, UserId},
+    MilliSecondsSinceUnixEpoch,
+};
 use ruma_macros::Event;
 use serde::{Deserialize, Serialize};
 

@@ -15,9 +15,9 @@ pub mod v3 {
             AnyStrippedStateEvent, AnySyncEphemeralRoomEvent, AnySyncRoomEvent, AnySyncStateEvent,
             AnyToDeviceEvent,
         },
+        identifiers::{DeviceKeyAlgorithm, RoomId, UserId},
         presence::PresenceState,
     };
-    use ruma_identifiers::{DeviceKeyAlgorithm, RoomId, UserId};
     use ruma_serde::{Outgoing, Raw};
     use serde::{Deserialize, Serialize};
 

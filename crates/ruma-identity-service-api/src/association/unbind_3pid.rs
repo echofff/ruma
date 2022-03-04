@@ -7,8 +7,11 @@ pub mod v2 {
     //!
     //! [spec]: https://spec.matrix.org/v1.2/identity-service-api/#post_matrixidentityv23pidunbind
 
-    use ruma_common::{api::ruma_api, thirdparty::Medium};
-    use ruma_identifiers::{user_id::UserId, ClientSecret, SessionId};
+    use ruma_common::{
+        api::ruma_api,
+        identifiers::{user_id::UserId, ClientSecret, SessionId},
+        thirdparty::Medium,
+    };
     use serde::{Deserialize, Serialize};
 
     ruma_api! {

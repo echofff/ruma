@@ -11,8 +11,8 @@ pub mod v3 {
     use ruma_common::{
         api::ruma_api,
         encryption::{DeviceKeys, OneTimeKey},
+        identifiers::{DeviceKeyAlgorithm, DeviceKeyId},
     };
-    use ruma_identifiers::{DeviceKeyAlgorithm, DeviceKeyId};
     use ruma_serde::Raw;
 
     ruma_api! {

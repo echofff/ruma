@@ -7,7 +7,7 @@ use std::{
     ops::{Deref, DerefMut},
 };
 
-use ruma_identifiers::{RoomId, UserId};
+use ruma_common::identifiers::{RoomId, UserId};
 use ruma_macros::EventContent;
 use serde::{Deserialize, Serialize};
 
@@ -36,11 +36,14 @@ impl DerefMut for DirectEventContent {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "rand"))]
 mod tests {
     use std::collections::BTreeMap;
 
-    use ruma_identifiers::{server_name, RoomId, UserId};
+    use ruma_common::{
+        identifiers::{RoomId, UserId},
+        server_name,
+    };
     use serde_json::{from_value as from_json_value, json, to_value as to_json_value};
 
     use super::{DirectEvent, DirectEventContent};

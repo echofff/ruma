@@ -9,7 +9,8 @@ use ruma_identifiers_validation::{
 };
 use url::Url;
 
-use crate::{EventId, PrivOwnedStr, RoomAliasId, RoomId, RoomOrAliasId, ServerName, UserId};
+use super::{EventId, RoomAliasId, RoomId, RoomOrAliasId, ServerName, UserId};
+use crate::PrivOwnedStr;
 
 const MATRIX_TO_BASE_URL: &str = "https://matrix.to/#/";
 const MATRIX_SCHEME: &str = "matrix";
@@ -500,8 +501,9 @@ mod tests {
 
     use super::{MatrixId, MatrixToUri, MatrixUri};
     use crate::{
-        event_id, matrix_uri::UriAction, room_alias_id, room_id, server_name, user_id,
-        RoomOrAliasId,
+        event_id,
+        identifiers::{matrix_uri::UriAction, RoomOrAliasId},
+        room_alias_id, room_id, server_name, user_id,
     };
 
     #[test]

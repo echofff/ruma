@@ -6,7 +6,7 @@ extern crate serde;
 use ruma_common::MilliSecondsSinceUnixEpoch;
 use ruma_common::events::{StateEventContent, Unsigned};
 use ruma_macros::Event;
-use ruma_identifiers::{EventId, RoomId, UserId};
+use ruma_common::identifiers::{EventId, RoomId, UserId};
 
 /// State event.
 #[derive(Clone, Debug, Event)]

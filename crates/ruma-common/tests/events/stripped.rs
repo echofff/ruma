@@ -1,11 +1,14 @@
 use std::convert::TryFrom;
 
 use js_int::uint;
-use ruma_common::events::{
-    room::{join_rules::JoinRule, topic::RoomTopicEventContent},
-    AnyStrippedStateEvent, StrippedStateEvent,
+use ruma_common::{
+    events::{
+        room::{join_rules::JoinRule, topic::RoomTopicEventContent},
+        AnyStrippedStateEvent, StrippedStateEvent,
+    },
+    identifiers::RoomName,
+    mxc_uri, user_id,
 };
-use ruma_identifiers::{mxc_uri, user_id, RoomName};
 use serde_json::{from_value as from_json_value, json, to_value as to_json_value};
 
 #[test]

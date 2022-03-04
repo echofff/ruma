@@ -2,10 +2,11 @@
 
 use js_int::UInt;
 use ruma_common::{
-    directory::PublicRoomJoinRule, events::space::child::HierarchySpaceChildStateEvent,
+    directory::PublicRoomJoinRule,
+    events::space::child::HierarchySpaceChildStateEvent,
+    identifiers::{MxcUri, RoomAliasId, RoomId, RoomName},
     room::RoomType,
 };
-use ruma_identifiers::{MxcUri, RoomAliasId, RoomId, RoomName};
 use ruma_serde::Raw;
 use serde::{Deserialize, Serialize};
 

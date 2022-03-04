@@ -71,7 +71,7 @@
 #![cfg_attr(docsrs, feature(doc_cfg, doc_auto_cfg))]
 
 #[doc(inline)]
-pub use ruma_identifiers as identifiers;
+pub use ruma_common::identifiers;
 #[doc(inline)]
 pub use ruma_serde as serde;
 
@@ -160,15 +160,16 @@ pub use js_int::{int, uint, Int, UInt};
 #[cfg(feature = "client-ext-client-api")]
 pub use ruma_client::Client;
 pub use ruma_common::{
-    authentication, directory, encryption, power_levels, presence, push, receipt, room, thirdparty,
-    to_device, MilliSecondsSinceUnixEpoch, PrivOwnedStr, SecondsSinceUnixEpoch,
-};
-pub use ruma_identifiers::{
-    device_id, device_key_id, event_id, matrix_uri, mxc_uri, room_alias_id, room_id,
-    room_version_id, server_name, server_signing_key_id, user_id, ClientSecret, DeviceId,
-    DeviceKeyAlgorithm, DeviceKeyId, DeviceSignatures, DeviceSigningKeyId, EntitySignatures,
-    EventEncryptionAlgorithm, EventId, KeyId, KeyName, MatrixToUri, MxcUri, RoomAliasId, RoomId,
-    RoomOrAliasId, RoomVersionId, ServerName, ServerSignatures, ServerSigningKeyId, SessionId,
-    Signatures, SigningKeyAlgorithm, TransactionId, UserId,
+    authentication, device_id, device_key_id, directory, encryption, event_id,
+    identifiers::{
+        matrix_uri, ClientSecret, DeviceId, DeviceKeyAlgorithm, DeviceKeyId, DeviceSignatures,
+        DeviceSigningKeyId, EntitySignatures, EventEncryptionAlgorithm, EventId, KeyId, KeyName,
+        MatrixToUri, MxcUri, RoomAliasId, RoomId, RoomOrAliasId, RoomVersionId, ServerName,
+        ServerSignatures, ServerSigningKeyId, SessionId, Signatures, SigningKeyAlgorithm,
+        TransactionId, UserId,
+    },
+    mxc_uri, power_levels, presence, push, receipt, room, room_alias_id, room_id, room_version_id,
+    server_name, server_signing_key_id, thirdparty, to_device, user_id, MilliSecondsSinceUnixEpoch,
+    PrivOwnedStr, SecondsSinceUnixEpoch,
 };
 pub use ruma_serde::Outgoing;

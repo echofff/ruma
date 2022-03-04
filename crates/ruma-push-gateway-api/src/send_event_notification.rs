@@ -12,10 +12,10 @@ pub mod v1 {
     use ruma_common::{
         api::ruma_api,
         events::EventType,
+        identifiers::{EventId, RoomAliasId, RoomId, RoomName, UserId},
         push::{PusherData, Tweak},
         SecondsSinceUnixEpoch,
     };
-    use ruma_identifiers::{EventId, RoomAliasId, RoomId, RoomName, UserId};
     use ruma_serde::{Outgoing, StringEnum};
     use serde::{Deserialize, Serialize};
     use serde_json::value::RawValue as RawJsonValue;
@@ -321,8 +321,9 @@ pub mod v1 {
     #[cfg(test)]
     mod tests {
         use js_int::uint;
-        use ruma_common::{events::EventType, SecondsSinceUnixEpoch};
-        use ruma_identifiers::{event_id, room_alias_id, room_id, user_id};
+        use ruma_common::{
+            event_id, events::EventType, room_alias_id, room_id, user_id, SecondsSinceUnixEpoch,
+        };
         use serde_json::{
             from_value as from_json_value, json, to_value as to_json_value, Value as JsonValue,
         };

@@ -4,7 +4,7 @@
 
 use std::collections::BTreeMap;
 
-use ruma_identifiers::TransactionId;
+use ruma_common::identifiers::TransactionId;
 use ruma_macros::EventContent;
 use ruma_serde::Base64;
 use serde::{Deserialize, Serialize};

@@ -3,8 +3,10 @@
 //! The only content valid for this event is `PresenceEventContent`.
 
 use js_int::UInt;
-use ruma_common::presence::PresenceState;
-use ruma_identifiers::{MxcUri, UserId};
+use ruma_common::{
+    identifiers::{MxcUri, UserId},
+    presence::PresenceState,
+};
 use ruma_macros::{Event, EventContent};
 use serde::{Deserialize, Serialize};
 
@@ -82,8 +84,7 @@ impl StaticEventContent for PresenceEventContent {
 mod tests {
     use js_int::uint;
     use matches::assert_matches;
-    use ruma_common::presence::PresenceState;
-    use ruma_identifiers::{mxc_uri, user_id};
+    use ruma_common::{mxc_uri, presence::PresenceState, user_id};
     use serde_json::{from_value as from_json_value, json, to_value as to_json_value};
 
     use super::{PresenceEvent, PresenceEventContent};

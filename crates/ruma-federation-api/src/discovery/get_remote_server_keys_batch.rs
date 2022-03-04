@@ -10,8 +10,11 @@ pub mod v2 {
 
     use std::collections::BTreeMap;
 
-    use ruma_common::{api::ruma_api, MilliSecondsSinceUnixEpoch};
-    use ruma_identifiers::{ServerName, ServerSigningKeyId};
+    use ruma_common::{
+        api::ruma_api,
+        identifiers::{ServerName, ServerSigningKeyId},
+        MilliSecondsSinceUnixEpoch,
+    };
     use ruma_serde::Raw;
     use serde::{Deserialize, Serialize};
 

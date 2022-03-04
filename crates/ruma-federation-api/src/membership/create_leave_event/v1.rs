@@ -6,9 +6,9 @@ use js_int::UInt;
 use ruma_common::{
     api::ruma_api,
     events::{room::member::RoomMemberEventContent, EventType},
+    identifiers::{EventId, RoomId, ServerName, UserId},
     MilliSecondsSinceUnixEpoch,
 };
-use ruma_identifiers::{EventId, RoomId, ServerName, UserId};
 use ruma_serde::Raw;
 use serde::{Deserialize, Serialize};
 

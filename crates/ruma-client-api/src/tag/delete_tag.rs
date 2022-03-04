@@ -5,8 +5,10 @@ pub mod v3 {
     //!
     //! [spec]: https://spec.matrix.org/v1.2/client-server-api/#put_matrixclientv3useruseridroomsroomidtagstag
 
-    use ruma_common::api::ruma_api;
-    use ruma_identifiers::{RoomId, UserId};
+    use ruma_common::{
+        api::ruma_api,
+        identifiers::{RoomId, UserId},
+    };
 
     ruma_api! {
         metadata: {

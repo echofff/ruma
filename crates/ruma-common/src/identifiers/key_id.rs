@@ -9,7 +9,7 @@ use std::{
     sync::Arc,
 };
 
-use crate::{crypto_algorithms::SigningKeyAlgorithm, DeviceId, KeyName};
+use super::{crypto_algorithms::SigningKeyAlgorithm, DeviceId, KeyName};
 
 /// A key algorithm and key name delimited by a colon.
 #[repr(transparent)]
@@ -192,7 +192,7 @@ impl<A, K: ?Sized> Hash for KeyId<A, K> {
         self.as_str().hash(state);
     }
 }
-#[cfg(feature = "serde")]
+
 impl<A, K: ?Sized> serde::Serialize for KeyId<A, K> {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -208,7 +208,6 @@ impl<A, K: ?Sized> From<Box<KeyId<A, K>>> for String {
     }
 }
 
-#[cfg(feature = "serde")]
 impl<'de, A, K: ?Sized> serde::Deserialize<'de> for Box<KeyId<A, K>> {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
@@ -223,7 +222,7 @@ impl<'de, A, K: ?Sized> serde::Deserialize<'de> for Box<KeyId<A, K>> {
     }
 }
 
-fn try_from<S, A, K: ?Sized>(s: S) -> Result<Box<KeyId<A, K>>, crate::Error>
+fn try_from<S, A, K: ?Sized>(s: S) -> Result<Box<KeyId<A, K>>, crate::identifiers::Error>
 where
     S: AsRef<str> + Into<Box<str>>,
 {
@@ -232,7 +231,7 @@ where
 }
 
 impl<'a, A, K: ?Sized> TryFrom<&'a str> for &'a KeyId<A, K> {
-    type Error = crate::Error;
+    type Error = crate::identifiers::Error;
 
     fn try_from(s: &'a str) -> Result<Self, Self::Error> {
         (ruma_identifiers_validation::key_id::validate)(s)?;
@@ -241,7 +240,7 @@ impl<'a, A, K: ?Sized> TryFrom<&'a str> for &'a KeyId<A, K> {
 }
 
 impl<A, K: ?Sized> FromStr for Box<KeyId<A, K>> {
-    type Err = crate::Error;
+    type Err = crate::identifiers::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         try_from(s)
@@ -249,7 +248,7 @@ impl<A, K: ?Sized> FromStr for Box<KeyId<A, K>> {
 }
 
 impl<A, K: ?Sized> TryFrom<&str> for Box<KeyId<A, K>> {
-    type Error = crate::Error;
+    type Error = crate::identifiers::Error;
 
     fn try_from(s: &str) -> Result<Self, Self::Error> {
         try_from(s)
@@ -257,7 +256,7 @@ impl<A, K: ?Sized> TryFrom<&str> for Box<KeyId<A, K>> {
 }
 
 impl<A, K: ?Sized> TryFrom<String> for Box<KeyId<A, K>> {
-    type Error = crate::Error;
+    type Error = crate::identifiers::Error;
 
     fn try_from(s: String) -> Result<Self, Self::Error> {
         try_from(s)

@@ -7,8 +7,11 @@ use std::{
     ops::{Deref, DerefMut},
 };
 
-use ruma_common::{receipt::ReceiptType, MilliSecondsSinceUnixEpoch};
-use ruma_identifiers::{EventId, UserId};
+use ruma_common::{
+    identifiers::{EventId, UserId},
+    receipt::ReceiptType,
+    MilliSecondsSinceUnixEpoch,
+};
 use ruma_macros::EventContent;
 use serde::{Deserialize, Serialize};
 

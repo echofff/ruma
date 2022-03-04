@@ -5,8 +5,7 @@ pub mod v3 {
     //!
     //! [spec]: https://spec.matrix.org/v1.2/client-server-api/#get_matrixclientv3thirdpartylocation
 
-    use ruma_common::{api::ruma_api, thirdparty::Location};
-    use ruma_identifiers::RoomAliasId;
+    use ruma_common::{api::ruma_api, identifiers::RoomAliasId, thirdparty::Location};
 
     ruma_api! {
         metadata: {

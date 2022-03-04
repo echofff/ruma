@@ -10,9 +10,9 @@ use ruma_common::{
         error::{DeserializationError, IntoHttpError},
         EndpointError, OutgoingResponse,
     },
+    identifiers::{ClientSecret, SessionId},
     thirdparty::Medium,
 };
-use ruma_identifiers::{ClientSecret, SessionId};
 use ruma_serde::{from_raw_json_value, JsonObject, Outgoing, StringEnum};
 use serde::{
     de::{self, DeserializeOwned},

@@ -7,8 +7,10 @@ pub mod v3 {
 
     use std::collections::BTreeMap;
 
-    use ruma_common::api::ruma_api;
-    use ruma_identifiers::{MxcUri, RoomId, UserId};
+    use ruma_common::{
+        api::ruma_api,
+        identifiers::{MxcUri, RoomId, UserId},
+    };
     use serde::{Deserialize, Serialize};
 
     ruma_api! {

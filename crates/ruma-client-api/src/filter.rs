@@ -7,7 +7,7 @@ mod lazy_load;
 mod url;
 
 use js_int::UInt;
-use ruma_identifiers::{RoomId, UserId};
+use ruma_common::identifiers::{RoomId, UserId};
 use ruma_serde::{Outgoing, StringEnum};
 use serde::Serialize;
 
